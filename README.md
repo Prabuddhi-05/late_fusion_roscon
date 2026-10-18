@@ -192,7 +192,9 @@ Near **2.8 seconds into the bag**, a foreground worker crosses in front of anoth
 
 ## Video walkthrough
 
-Watch the [CPU footpath walkthrough](docs/cpu_footpath_walkthrough.mp4) (95 seconds) to see the Dev Container, bag replay, and RViz2 desktop in use.
+This video walkthrough shows the CPU Dev Container, footpath bag replay, and RViz2 desktop.
+
+https://github.com/user-attachments/assets/23314670-c932-40db-8c4d-3fb0f2f3e88d
 
 ## Troubleshooting
 
