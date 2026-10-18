@@ -178,13 +178,11 @@ Near **3.9 seconds into the bag**, compare the blue camera box, green projected 
 
 ![Footpath worker shown as camera detection, matched 3D projection, and track](docs/footpath_example.png)
 
-#### Vineyard: a worker fully hidden in the camera image
+#### Vineyard: a worker absent from camera detections
 
-Near **2.8 seconds into the bag**, a foreground worker crosses in front of another. The hidden worker has no separate YOLO11s box in this image, but a LiDAR proposal remains near that worker and DeepFusionMOT keeps a 3D track. The screenshot shows the same camera frame at three pipeline stages.
+Near **2.8 seconds into the bag**, a foreground worker crosses in front of another. The hidden worker is absent from the YOLO11s detections, but a LiDAR detection remains near that worker and DeepFusionMOT keeps a 3D track.
 
-![Vineyard occlusion: no separate camera box for the hidden worker, but a LiDAR-based track remains](docs/occlusion_example.png)
-
-The AGHRI annotation calls the hidden worker **09**; DeepFusionMOT calls the nearby track **#6**. Those IDs come from different systems. LiDAR does not see through a person; the sensors have different viewpoints and timing.
+![Vineyard occlusion: the hidden worker is absent from camera detections but has a LiDAR detection and track](docs/occlusion_example.png)
 
 #### Vineyard: partial trolley occlusion
 
@@ -192,7 +190,7 @@ Near **9.6 seconds into the bag**, a trolley hides part of a worker, but a green
 
 ![Partly hidden vineyard worker with a projected 3D match](docs/partial_occlusion.png)
 
-An unmatched LiDAR box elsewhere in the scene is only a proposal. Check surrounding frames before treating it as a hidden person.
+An unmatched LiDAR detection elsewhere in the scene does not necessarily represent a hidden person. Check surrounding frames before deciding.
 
 ## Troubleshooting
 
