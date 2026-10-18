@@ -1,23 +1,16 @@
-# Workshop background: AGHRI and DeepFusionMOT
+# Workshop background: AGHRI dataset and late camera-LiDAR human detection fusion and multi-object tracking (DeepFusionMOT)
 
-This page provides a short introduction for the demo and a closer look at the data and tracking pipeline. The [main README](../README.md) has the setup commands and activities.
+This page introduces the AGHRI dataset and the late camera-LiDAR human detection fusion and multi-object tracking pipeline used in the demo. The [main README](../README.md) has the setup commands and activities.
 
-## Slide 1 — AGHRI Dataset (about 1 minute)
+## Section 1 — AGHRI Dataset Overview
 
-- **AGHRI** is a multimodal dataset for sensing people around agricultural robots, developed at the University of Lincoln.
-- It covers four environments: **strawberry polytunnels, vineyards, footpaths, and farmsides**.
-- The robot records **ZED RGB-D**, **three fisheye cameras**, and **3D LiDAR**, with calibration and motion metadata.
-- People walk, stand, inspect the robot, push trolleys, carry trays, and work among crops. Conditions include sun, overcast skies, some snow, and occlusion.
-- The release provides **2D camera boxes, 3D LiDAR cuboids, person identities, and front-ZED occlusion events** for detection and tracking research.
-- **Today's demo uses the ZED RGB camera and Livox LiDAR** from two selected recordings: `footpath` and `vine`.
+[Watch the AGHRI dataset video](https://www.youtube.com/watch?v=nL7mKnMcCzc).
 
-[Watch the two-minute AGHRI dataset video](https://www.youtube.com/watch?v=nL7mKnMcCzc). The [AGHRI dataset page](https://doi.org/10.24385/lincoln.32982638) describes the full release; the workshop download contains only the selected bags, caches, and checkpoints.
+AGHRI is a multimodal dataset developed for robot perception of humans in agricultural and off-road environments. It was designed for close-proximity human–robot interaction scenarios in which a compact mobile robot operates around farm workers in cluttered, dynamic, and frequently occluded environments.
 
-### Dataset overview
+The dataset supports research on **2D and 3D human detection**, **2D and 3D multi-object tracking**, **person re-identification**, and **camera–LiDAR fusion**. The [AGHRI dataset page](https://doi.org/10.24385/lincoln.32982638) describes the full release; the workshop download contains two selected recordings and their supporting files.
 
-AGHRI supports research on **2D and 3D human detection**, **2D and 3D multi-object tracking**, **person re-identification**, and **camera–LiDAR fusion**. The full release contains many sequences; the workshop uses one footpath and one vineyard recording.
-
-### Robotic platform and sensors
+### Robotic Platform and Sensors
 
 AGHRI was collected on an **Agilex Hunter 2.0** with a **ZED 2 RGB-D camera**, three **Arducam fisheye cameras**, and a **Livox Mid-360 LiDAR**.
 
@@ -27,19 +20,49 @@ The modalities capture different views of the same scene: RGB appearance, depth,
 
 ![Examples of synchronised AGHRI sensor data](background/aghri_modalities.png)
 
-### Collection environments and activities
+### Collection Environments
+
+The dataset was recorded at the University of Lincoln's Riseholme Campus in Lincoln, United Kingdom, between October and November 2024. It covers four environments:
+
+- Strawberry polytunnel
+- Vineyard
+- Footpath
+- Farmside
+
+Recordings include sunny and overcast conditions, with snow present in some polytunnel, footpath, and farmside sessions.
 
 ![Polytunnel, vineyard, footpath, and farmside scenes](background/aghri_environments.png)
 
-The recordings include single- and multi-person scenes. People walk, stand, talk, check the robot, push trolleys, carry trays, and pick fruit. The robot may be stationary or moving.
+### Activities
 
-### Annotations
+AGHRI contains single-person and multi-person sequences covering common movement and agricultural work activities.
 
-The camera annotations mark people with **2D boxes and identities** in the ZED RGB and fisheye views. The LiDAR annotations mark people with **3D boxes and identities**. The front-ZED occlusion log records partial, total, and out-of-frame visibility events. ZED depth is provided as sensor data but is not one of the annotated modalities.
+**Common activities:**
+
+- Walking
+- Standing
+- Talking
+- Checking or looking at the robot
+
+**Agricultural activities:**
+
+- Pushing a trolley
+- Carrying a tray
+- Swapping trays
+- Picking strawberries
+- Picking grapes
+
+The robot is recorded in both stationary and moving states.
+
+### Annotations and Identities
+
+AGHRI provides **2D and 3D human annotations** with participant-level identities that remain consistent across the annotated modalities and released sequences. The ZED RGB and three fisheye views have 2D person boxes; LiDAR has 3D person cuboids. The front-ZED occlusion log records partial, total, and out-of-frame visibility events. ZED depth is sensor data but is not an annotated modality.
+
+**Today's demo uses the ZED RGB camera and Livox LiDAR** from two recordings in different environments: `footpath` and `vine` (vineyard).
 
 A dataset identity is ground truth; a number assigned by DeepFusionMOT during this demo is a separate tracker ID.
 
-## Slide 2 — DeepFusionMOT (about 2 minutes)
+## Section 2 — Late Camera-LiDAR Human Detection Fusion and Multi-Object Tracking (DeepFusionMOT)
 
 - **Goal:** detect multiple people and keep their identities over time using camera and LiDAR.
 - **YOLO11s** finds people as 2D boxes in the ZED RGB image.
