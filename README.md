@@ -1,4 +1,6 @@
-# ROSCon UK 2026 workshop: ROS in the Field<br>ROS 2 late camera–LiDAR fusion and human tracking on AGHRI
+# ROSCon UK 2026 workshop: ROS in the Field
+
+## ROS 2 late camera–LiDAR fusion and human tracking on AGHRI
 
 Replay an AGHRI dataset ROS 2 recording to inspect camera and LiDAR detections, see how the DeepFusionMOT pipeline fuses them and tracks humans, and view the results in RViz2. The workshop runs in a VS Code Dev Container on **Ubuntu**.
 
@@ -86,7 +88,7 @@ bash run.sh footpath
 
 Open VS Code's **PORTS** tab, find **ROSCon RViz2 desktop** (container port **6080**), and choose **Open in Browser**. Open the forwarded address with `/vnc.html` at the end, then click **Connect**. For example, if VS Code forwards to port 6080, use `http://localhost:6080/vnc.html`. Use the actual forwarded address shown in **PORTS** if it differs.
 
-When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. The **vineyard** bag shows four workers, a trolley, and trays. To play it, run:
+When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. The **vineyard** bag shows four workers, trolleys, and trays. To play it, run:
 
 ```bash
 bash run.sh vine
@@ -100,13 +102,13 @@ ros2 topic list -t
 
 The main topic families are the same in both modes:
 
-| Topic family | Example topics | What they carry |
-| --- | --- | --- |
-| **/dataset/** | `/dataset/cam_zed_rgb/image`<br>`/dataset/lidar/points` | Camera images and LiDAR points replayed from the bag. |
-| **/detector/** | `/detector/camera/detections`<br>`/detector/lidar/detections` | YOLO11s and PointPillars predictions: replayed caches in CPU mode, live inference in GPU mode. |
-| **/late_fusion/** | `/late_fusion/matched_3d`<br>`/late_fusion/unmatched_lidar`<br>`/late_fusion/unmatched_camera` | Matched 3D detections, unmatched LiDAR 3D detections, and unmatched camera 2D detections. |
-| **/deepfusionmot/** | `/deepfusionmot/tracked_3d`<br>`/deepfusionmot/tracked_2d` | Live 3D and 2D tracks. |
-| **/visualization/** | `/visualization/tracked_projection_image`<br>`/visualization/tracked_3d_markers` | Images and markers shown in RViz2. |
+| Topic family and example topics | What they carry |
+| --- | --- |
+| **/dataset/**<br>`/dataset/cam_zed_rgb/image`<br>`/dataset/lidar/points` | Camera images and LiDAR points replayed from the bag. |
+| **/detector/**<br>`/detector/camera/detections`<br>`/detector/lidar/detections` | YOLO11s and PointPillars predictions: replayed caches in CPU mode, live inference in GPU mode. |
+| **/late_fusion/**<br>`/late_fusion/matched_3d`<br>`/late_fusion/unmatched_lidar`<br>`/late_fusion/unmatched_camera` | Matched 3D detections, unmatched LiDAR 3D detections, and unmatched camera 2D detections. |
+| **/deepfusionmot/**<br>`/deepfusionmot/tracked_3d`<br>`/deepfusionmot/tracked_2d` | Live 3D and 2D tracks. |
+| **/visualization/**<br>`/visualization/tracked_projection_image`<br>`/visualization/tracked_3d_markers` | Images and markers shown in RViz2. |
 
 ### 5. Understand the RViz2 view
 
