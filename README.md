@@ -13,7 +13,7 @@ Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GP
 
 **During the workshop:** Start at Step 4 to play a bag and explore the activities.
 
-## 1. Prerequisites: prepare Ubuntu
+## 1. Install the prerequisites
 
 Install [Docker Engine with the Compose plugin](https://docs.docker.com/engine/install/ubuntu/), [VS Code](https://code.visualstudio.com/docs/setup/linux), the **Dev Containers** extension, and Git. Configure Docker so your user can run it from VS Code; follow [Docker's Linux post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) if needed.
 
