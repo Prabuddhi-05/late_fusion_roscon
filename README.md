@@ -9,7 +9,11 @@ Replay an AGHRI ROS 2 recording, inspect camera and LiDAR detections, and see ho
 
 Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a separate download.
 
-## 1. Prepare Ubuntu
+**Before the workshop:** Complete Steps 1–3, including the data checksum check and the first Dev Container build. Build both modes in advance if you want to try both; the first build can take time.
+
+**During the workshop:** Start at Step 4 to play a bag and explore the activities.
+
+## 1. Prerequisites: prepare Ubuntu
 
 Install [Docker Engine with the Compose plugin](https://docs.docker.com/engine/install/ubuntu/), [VS Code](https://code.visualstudio.com/docs/setup/linux), the **Dev Containers** extension, and Git. Configure Docker so your user can run it from VS Code; follow [Docker's Linux post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) if needed.
 
