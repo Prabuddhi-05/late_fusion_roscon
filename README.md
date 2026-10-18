@@ -182,7 +182,7 @@ Near **3.9 seconds into the bag**, compare the blue camera box, green projected 
 
 Four snapshots from the footpath bag show one visible worker with different magenta track IDs. A track ID is the tracker's current identity estimate, not a permanent person identity. If an association is lost, DeepFusionMOT can start a new track; this workshop tracker has no appearance re-identification model.
 
-<img src="docs/footpath_track_ids.png" alt="Four footpath frames showing one worker with different DeepFusionMOT track IDs" width="900">
+<img src="docs/footpath_track_ids.png" alt="Four footpath frames showing one worker with different DeepFusionMOT track IDs" width="700">
 
 #### Vineyard: a worker absent from camera detections
 
