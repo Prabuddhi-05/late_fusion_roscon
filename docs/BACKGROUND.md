@@ -1,6 +1,6 @@
 # Workshop background: AGHRI dataset and late camera-LiDAR fusion
 
-This page introduces the AGHRI dataset and the late camera-LiDAR human detection fusion and multi-object tracking pipeline used in the demo. The [main README](../README.md) has the setup commands and activities.
+This page introduces the AGHRI dataset and the late camera-LiDAR fusion pipeline used in the demo. The [main README](../README.md) has the setup commands and activities.
 
 ## Section 1 — AGHRI Dataset Overview
 
@@ -25,7 +25,7 @@ AGHRI supports research on:
 
 AGHRI was collected on an **Agilex Hunter 2.0** with a **ZED 2 RGB-D camera**, three **Arducam fisheye cameras**, and a **Livox Mid-360 LiDAR**.
 
-<img src="background/aghri_platform.png" alt="AGHRI robotic platform and sensors" width="420">
+<img src="background/aghri_platform.png" alt="AGHRI robotic platform and sensors" width="520">
 
 The modalities capture different views of the same scene: RGB appearance, depth, wide-angle fisheye images, and a 3D point cloud.
 
