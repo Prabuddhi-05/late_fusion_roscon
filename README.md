@@ -166,7 +166,7 @@ ros2 param get /aghri_late_fusion iou_threshold
 ros2 param set /aghri_late_fusion iou_threshold 0.5
 ```
 
-If the node has not appeared, retry the `get` command, then set the value. Compare the green matched boxes, red unmatched boxes, and magenta tracks. A fresh launch restores `0.10`.
+If the node has not appeared, retry the `get` command, then set the value. Compare the green matched boxes, red unmatched boxes, and magenta tracks. A fresh launch restores `0.10`. When each run finishes, compare the `accepted camera-LiDAR matches` totals printed in terminal A.
 
 In a tested **CPU footpath** replay, the number of accepted matches across the recording changed from **175 to 75**; tracks continued. These are summed matches across frames, not unique people. GPU results can differ.
 

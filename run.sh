@@ -31,4 +31,4 @@ else
 fi
 
 bash /opt/roscon/pipeline.sh "$mode" "$bag"
-python3 /opt/roscon/verify.py "$mode" --bag "$bag" --output /output
+python3 "$(dirname "$0")/docker/verify.py" "$mode" --bag "$bag" --output /output

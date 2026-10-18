@@ -7,6 +7,16 @@ import json
 from pathlib import Path
 
 
+def accepted_match_count(fusion_events):
+    total = 0
+    for data in fusion_events:
+        fields = dict(part.split("=", 1) for part in data.split(",") if "=" in part)
+        if "matches" not in fields:
+            raise ValueError(f"fusion diagnostic has no matches count: {data}")
+        total += int(fields["matches"])
+    return total
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=("cpu", "gpu"))
@@ -42,6 +52,7 @@ def main():
     for source in ("camera_cache", "lidar_cache", "camera_live", "lidar_live", "fusion", "tracking"):
         if by_source[source]:
             print(f"{source}: {len(by_source[source])}")
+    print(f"accepted camera-LiDAR matches: {accepted_match_count(by_source['fusion'])} (sum across fusion updates)")
     print(f"{args.mode} {args.bag} pipeline: PASS")
 
 
