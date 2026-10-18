@@ -184,13 +184,11 @@ Near **2.8 seconds into the bag**, a foreground worker crosses in front of anoth
 
 ![Vineyard occlusion: the hidden worker is absent from camera detections but has a LiDAR detection and track](docs/occlusion_example.png)
 
-#### Vineyard: partial trolley occlusion
+#### Footpath: one worker, changing track IDs
 
-Near **9.6 seconds into the bag**, a trolley hides part of a worker, but a green 3D match remains. Compare this with the fully hidden worker above.
+Four snapshots from the footpath bag show one visible worker with different magenta track IDs. A track ID is the tracker's current identity estimate, not a permanent person identity. If an association is lost, DeepFusionMOT can start a new track; this workshop tracker has no appearance re-identification model.
 
-![Partly hidden vineyard worker with a projected 3D match](docs/partial_occlusion.png)
-
-An unmatched LiDAR detection elsewhere in the scene does not necessarily represent a hidden person. Check surrounding frames before deciding.
+![Four footpath frames showing one worker with different DeepFusionMOT track IDs](docs/footpath_track_ids.png)
 
 ## Troubleshooting
 
