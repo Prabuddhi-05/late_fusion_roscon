@@ -68,7 +68,7 @@ The CPU container mounts `bags` and `caches`; the GPU container mounts `bags` an
 1. Open `~/roscon-workshop/late_fusion_roscon` in VS Code (**File → Open Folder**).
 2. Press **Ctrl+Shift+P**, select **Dev Containers: Reopen in Container**, and choose either **ROSCon CPU cached detections** or **ROSCon GPU live detections**.
 3. Wait for the image build and for VS Code to reopen with the selected container name in its title bar. The first build downloads dependencies and can take time.
-4. Open **Terminal → New Terminal**. The prompt should be inside `/workspace`.
+4. Open **Terminal → New Terminal**. The prompt should be inside `/workspace`, with ROS 2 ready to use.
 
 VS Code starts the selected service from `compose.yaml`. If you later want the other mode, reopen the folder locally and repeat these steps with the other configuration.
 
@@ -82,12 +82,21 @@ In the **container terminal**, run one recording:
 bash run.sh footpath
 ```
 
+`run.sh` selects the bag, checks the required files, launches the ROS 2 pipeline, and checks its output. You can use `ros2` commands directly in any new container terminal.
+
 Open VS Code's **PORTS** tab, find **ROSCon RViz2 desktop** (container port **6080**), and choose **Open in Browser**. Open the forwarded address with `/vnc.html` at the end, then click **Connect**. For example, if VS Code forwards to port 6080, use `http://localhost:6080/vnc.html`. Use the actual forwarded address shown in **PORTS** if it differs.
 
 When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. To play the other scene, run:
 
 ```bash
 bash run.sh vine
+```
+
+To see the ROS 2 topics while a bag is playing, open a second container terminal and run:
+
+```bash
+ros2 topic list -t
+ros2 topic info /deepfusionmot/tracked_3d
 ```
 
 ### 5. Understand the RViz2 view
@@ -142,7 +151,6 @@ ROSCON_PLAYBACK_RATE=0.5 bash run.sh footpath
 For a second run, start the same command in **terminal A**. During the launch delay, before bag playback begins, use **terminal B** in the same container:
 
 ```bash
-source /opt/ros/humble/setup.bash
 ros2 param get /aghri_late_fusion iou_threshold
 ros2 param set /aghri_late_fusion iou_threshold 0.5
 ```

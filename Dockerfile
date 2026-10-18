@@ -28,6 +28,12 @@ ENTRYPOINT ["/opt/roscon/entrypoint.sh"]
 
 FROM common AS cpu
 
+RUN printf '%s\n' \
+    '' \
+    '# Load ROS 2 in interactive terminals.' \
+    'source /opt/ros/humble/setup.bash' \
+    'source /opt/roscon/ws/install/setup.bash' >> /etc/bash.bashrc
+
 FROM common AS gpu
 
 ENV PIP_NO_CACHE_DIR=1 \
@@ -55,3 +61,9 @@ RUN python3 -m pip install --no-cache-dir \
     spconv-cu118==2.3.8 ultralytics==8.3.154
 
 COPY models /opt/roscon/models
+
+RUN printf '%s\n' \
+    '' \
+    '# Load ROS 2 in interactive terminals.' \
+    'source /opt/ros/humble/setup.bash' \
+    'source /opt/roscon/ws/install/setup.bash' >> /etc/bash.bashrc
