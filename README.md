@@ -141,15 +141,15 @@ Follow a magenta track number through successive frames. **Question:** does it s
 
 #### Activity 2: Reveal each processing stage
 
-Run either bag. In RViz2's **Displays** panel, toggle these checkboxes one at a time:
+While either bag is playing, use RViz2's **Displays** panel to turn each group off and back on. Watch what disappears and reappears in the camera images and 3D view:
 
-1. **YOLO 2D Detection Image** — camera detections.
-2. **AGHRI LiDAR** and **Original LiDAR Boxes** — point cloud and raw LiDAR proposals.
-3. **Matched 3D Boxes** and **Matched 3D Projection Image** — camera–LiDAR matches.
-4. **Unmatched LiDAR Boxes** — proposals without a camera match.
-5. **Tracked DeepFusionMOT Boxes** and **Tracked DeepFusionMOT Projection Image** — tracker output.
+1. **YOLO 2D Detection Image** — blue camera detections.
+2. **AGHRI LiDAR** and **Original LiDAR Boxes** — point cloud and yellow LiDAR detections.
+3. **Matched 3D Boxes** and **Matched 3D Projection Image** — green camera–LiDAR matches.
+4. **Unmatched LiDAR Boxes** — red LiDAR detections without a camera match.
+5. **Tracked DeepFusionMOT Boxes** and **Tracked DeepFusionMOT Projection Image** — magenta tracks.
 
-**Question:** which boxes remain when a camera match is absent? The checkboxes only change what RViz2 displays; the pipeline keeps running.
+The checkboxes change only what RViz2 shows; the pipeline keeps running.
 
 #### Activity 3: Change the matching threshold
 
