@@ -9,7 +9,7 @@ Replay an AGHRI ROS 2 recording, inspect camera and LiDAR detections, and see ho
 
 Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a separate download.
 
-**Before the workshop:** Complete Steps 1–3: install the prerequisites, clone the repository, download and verify the workshop data, and open your chosen Dev Container once so Docker can build its image. Build both modes in advance if you want to try both; the first build can take time.
+**Before the workshop:** Complete Steps 1–3. Install the prerequisites, download and verify the data, then open your chosen Dev Container and wait for VS Code to reopen inside it. This completes that mode's initial Docker image build. If you plan to try both modes, repeat Step 3 for the other mode before the workshop.
 
 **During the workshop:** Start at Step 4 to play a bag and explore the activities.
 
@@ -67,7 +67,7 @@ The CPU container mounts `bags` and `caches`; the GPU container mounts `bags` an
 
 1. Open `~/roscon-workshop/late_fusion_roscon` in VS Code (**File → Open Folder**).
 2. Press **Ctrl+Shift+P**, select **Dev Containers: Reopen in Container**, and choose either **ROSCon CPU cached detections** or **ROSCon GPU live detections**.
-3. Wait for the image build and for VS Code to reopen with the selected container name in its title bar. The first build downloads dependencies and can take time.
+3. The first time you open a mode, Docker builds its image and downloads dependencies. Wait until VS Code reopens with the selected container name in its title bar; this can take time.
 4. Open **Terminal → New Terminal**. The prompt should be inside `/workspace`, with ROS 2 ready to use.
 
 VS Code starts the selected service from `compose.yaml`. If you later want the other mode, reopen the folder locally and repeat these steps with the other configuration.
