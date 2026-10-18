@@ -202,4 +202,4 @@ Near **2.8 seconds into the bag**, a foreground worker crosses in front of anoth
 
 ## Background
 
-For the dataset video, sensor examples, late-fusion figures, and the four DeepFusionMOT association levels, see [AGHRI and DeepFusionMOT: workshop background](docs/BACKGROUND.md).
+For a closer look at the AGHRI dataset and DeepFusionMOT, see the [workshop background](docs/BACKGROUND.md).
