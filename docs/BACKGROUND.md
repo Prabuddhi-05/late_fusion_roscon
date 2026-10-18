@@ -29,7 +29,7 @@ AGHRI was collected on an **Agilex Hunter 2.0** with a **ZED 2 RGB-D camera**, t
 
 The modalities capture different views of the same scene: RGB appearance, depth, wide-angle fisheye images, and a 3D point cloud.
 
-![Examples of synchronised AGHRI sensor data](background/aghri_modalities.png)
+<img src="background/aghri_modalities.png" alt="Examples of synchronised AGHRI sensor data" width="600">
 
 ### Collection Environments
 
