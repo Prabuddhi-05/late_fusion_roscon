@@ -75,7 +75,7 @@ A dataset identity is ground truth; a number assigned by DeepFusionMOT during th
 
 ## Section 2 — Late Camera-LiDAR Fusion (DeepFusionMOT)
 
-The [original DeepFusionMOT research](https://github.com/wangxiyang2022/DeepFusionMOT) proposes a camera–LiDAR fusion framework for multi-object tracking. This workshop uses its AGHRI adaptation to track people.
+The [original DeepFusionMOT research](https://github.com/wangxiyang2022/DeepFusionMOT) proposes a late camera–LiDAR fusion framework for multi-object detection and tracking. This workshop uses its AGHRI adaptation to track humans.
 
 Late fusion projects 3D LiDAR detections into the camera image and matches them with 2D camera detections using intersection over union (**IoU**).
 
