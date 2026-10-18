@@ -1,0 +1,57 @@
+version: "3.8"
+
+x-common: &common
+  init: true
+  user: "1000:1000"
+  environment: &common_environment
+    DISPLAY: ":99"
+    LIBGL_ALWAYS_SOFTWARE: "1"
+    QT_X11_NO_MITSHM: "1"
+    ROS_DOMAIN_ID: "42"
+    ROS_LOCALHOST_ONLY: "1"
+    ROSCON_LAUNCH_RVIZ: "false"
+    HOME: /tmp
+    NVIDIA_DRIVER_CAPABILITIES: compute,utility
+  ports:
+    - "127.0.0.1:${ROSCON_DESKTOP_PORT:-6080}:6080"
+  command: ["/bin/bash", "-lc", "/opt/roscon/desktop.sh && exec sleep infinity"]
+
+services:
+  cpu:
+    <<: *common
+    profiles: [cpu]
+    image: roscon-2026:cpu
+    build:
+      context: .
+      target: cpu
+      network: "${ROSCON_BUILD_NETWORK:-default}"
+    environment:
+      <<: *common_environment
+      ROSCON_MODE: cpu
+    volumes:
+      - .:/workspace:rw
+      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/bags:/data/bags:ro"
+      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/caches:/data/caches:ro"
+
+  gpu:
+    <<: *common
+    profiles: [gpu]
+    image: roscon-2026:gpu
+    build:
+      context: .
+      target: gpu
+      network: "${ROSCON_BUILD_NETWORK:-default}"
+    environment:
+      <<: *common_environment
+      ROSCON_MODE: gpu
+    volumes:
+      - .:/workspace:rw
+      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/bags:/data/bags:ro"
+      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/checkpoints:/models:ro"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

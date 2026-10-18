@@ -1,0 +1,16 @@
+{
+  "name": "ROSCon GPU live detections",
+  "dockerComposeFile": ["../../compose.yaml"],
+  "service": "gpu",
+  "runServices": ["gpu"],
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "initializeCommand": "bash docker/prepare.sh",
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "ROSCon RViz2 desktop",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
