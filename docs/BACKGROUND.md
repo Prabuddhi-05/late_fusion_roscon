@@ -73,20 +73,13 @@ AGHRI provides **2D and 3D human annotations** with participant-level identities
 
 A dataset identity is ground truth; a number assigned by DeepFusionMOT during this demo is a separate tracker ID.
 
-## Section 2 — Late Camera-LiDAR Human Detection Fusion and Multi-Object Tracking (DeepFusionMOT)
+## Section 2 — Late Camera-LiDAR Fusion (DeepFusionMOT)
 
-- **Goal:** detect multiple people and keep their identities over time using camera and LiDAR.
-- **YOLO11s** finds people as 2D boxes in the ZED RGB image.
-- **PointPillars** finds people as 3D cuboids in the LiDAR point cloud.
-- **Late fusion** decides which camera and LiDAR detections describe the same person.
-- The **AGHRI DeepFusionMOT adaptation** associates detections with existing tracks and assigns persistent IDs.
-- **RViz2** shows the camera boxes, LiDAR proposals, matches, unmatched proposals, and tracks.
+The [original DeepFusionMOT research](https://github.com/wangxiyang2022/DeepFusionMOT) proposes a camera–LiDAR fusion framework for multi-object tracking. This workshop uses its AGHRI adaptation to track people.
 
-In **GPU mode**, both detectors run on each replayed sensor stream. In **CPU mode**, their saved predictions are replayed. Fusion and tracking run live in both modes.
+Late fusion projects 3D LiDAR detections into the camera image and matches them with 2D camera detections using intersection over union (**IoU**).
 
-The original DeepFusionMOT research uses a camera–LiDAR tracking framework; this workshop uses its AGHRI adaptation for people.
-
-### Figure 1: AGHRI late-fusion and deep-association architecture
+### AGHRI late-fusion and deep-association architecture
 
 ![AGHRI late-fusion and four-level DeepFusionMOT association architecture](background/late_fusion_architecture.png)
 
@@ -96,12 +89,12 @@ The wider AGHRI benchmark supports **SECOND or PointPillars** for LiDAR detectio
 
 1. YOLO11s produces a 2D person box; PointPillars produces a 3D person cuboid.
 2. Calibration transforms the LiDAR cuboid into the camera view. Its projected corners form a 2D image envelope.
-3. The fusion node compares that envelope with camera boxes using image-space intersection over union (**IoU**) and assigns candidate pairs.
+3. The fusion node compares that envelope with camera boxes using image-space IoU. It selects one-to-one camera–LiDAR pairs that favour higher overlap and accepts pairs that meet the IoU threshold.
 4. It sends results down three paths: **matched 3D**, **unmatched LiDAR 3D**, and **unmatched camera 2D**. A match preserves the detector's 3D cuboid.
 
-### Figure 2: Same-frame camera–LiDAR association example
+### Same-frame camera–LiDAR association example
 
-![One AGHRI frame showing the camera box, LiDAR cuboid, projected overlap, and routed output](background/same_frame_association.png)
+<img src="background/same_frame_association.png" alt="One AGHRI frame showing the camera box, LiDAR cuboid, projected overlap, and routed output" width="760">
 
 In this footpath frame, the projected LiDAR envelope overlaps the YOLO box with **IoU ≈ 0.597**. That exceeds the workshop's default **0.10** threshold, so it becomes a camera-supported 3D detection. The figure is one frame; tracking uses evidence across successive frames.
 
@@ -113,12 +106,10 @@ The tracker predicts where existing tracks should be, then associates new eviden
 | --- | --- | --- |
 | **1** | Camera-matched 3D detections → existing 3D tracks | Updates 3D tracks with detections supported by both sensors. |
 | **2** | LiDAR-only 3D detections → remaining 3D tracks | Can maintain a 3D track when no camera match was accepted. |
-| **3** | Camera-only 2D detections → existing 2D tracks | Maintains a separate camera-space tracking branch. |
+| **3** | Camera-only 2D detections → existing 2D tracks | Can maintain a 2D track when no LiDAR match was accepted. |
 | **4** | Updated 2D tracks → remaining projected 3D tracks | Uses compatible 2D evidence to support a 3D track that Level 1 or 2 did not update. |
 
 Kalman prediction and robot-motion compensation prepare the tracks for each new frame; track management then updates, starts, or retires tracks after association.
-
-The node publishes **3D tracks** on `/deepfusionmot/tracked_3d` and **2D tracks** on `/deepfusionmot/tracked_2d`. The workshop's RViz2 layout displays the 3D tracks and their camera projections. A red unmatched LiDAR box can therefore still contribute to a magenta track.
 
 ## Sources
 
@@ -127,5 +118,3 @@ The node publishes **3D tracks** on `/deepfusionmot/tracked_3d` and **2D tracks*
 - [AGHRI late-fusion benchmark](https://github.com/LCAS/AGHRI-dataset-benchmark)
 - [Original DeepFusionMOT implementation](https://github.com/wangxiyang2022/DeepFusionMOT)
 - [DeepFusionMOT paper](https://arxiv.org/abs/2202.12100)
-
-The dataset photographs and sensor montage are reproduced from the local AGHRI Dataset Tools workspace. Figures 1 and 2 are reproduced from the local AGHRI late-fusion benchmark workspace.
