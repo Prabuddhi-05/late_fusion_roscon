@@ -178,17 +178,17 @@ Near **3.9 seconds into the bag**, compare the blue camera box, green projected 
 
 ![Footpath worker shown as camera detection, matched 3D projection, and track](docs/footpath_example.png)
 
+#### Footpath: one worker, changing track IDs
+
+Four snapshots from the footpath bag show one visible worker with different magenta track IDs. A track ID is the tracker's current identity estimate, not a permanent person identity. If an association is lost, DeepFusionMOT can start a new track; this workshop tracker has no appearance re-identification model.
+
+<img src="docs/footpath_track_ids.png" alt="Four footpath frames showing one worker with different DeepFusionMOT track IDs" width="900">
+
 #### Vineyard: a worker absent from camera detections
 
 Near **2.8 seconds into the bag**, a foreground worker crosses in front of another. The hidden worker is absent from the YOLO11s detections, but a LiDAR detection remains near that worker and DeepFusionMOT keeps a 3D track.
 
 ![Vineyard occlusion: the hidden worker is absent from camera detections but has a LiDAR detection and track](docs/occlusion_example.png)
-
-#### Footpath: one worker, changing track IDs
-
-Four snapshots from the footpath bag show one visible worker with different magenta track IDs. A track ID is the tracker's current identity estimate, not a permanent person identity. If an association is lost, DeepFusionMOT can start a new track; this workshop tracker has no appearance re-identification model.
-
-![Four footpath frames showing one worker with different DeepFusionMOT track IDs](docs/footpath_track_ids.png)
 
 ## Troubleshooting
 
