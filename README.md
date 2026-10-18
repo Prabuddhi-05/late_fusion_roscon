@@ -33,7 +33,7 @@ cd ~/roscon-workshop
 git clone https://github.com/Prabuddhi-05/late_fusion_roscon.git
 ```
 
-Download the data from the [shared workshop folder](https://universityoflincoln-my.sharepoint.com/personal/26619055_students_lincoln_ac_uk/_layouts/15/onedrive.aspx?id=%2Fpersonal%2F26619055%5Fstudents%5Flincoln%5Fac%5Fuk%2FDocuments%2FPhD%20%2D%20Prabuddhi%20%2D%202026%2FROSCon%5Flate%5Ffusion&ga=1). Extract it beside the clone in a folder named **`late_fusion_roscon_data`**. The folder should contain:
+Download the data from the [shared workshop folder](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd). Extract it beside the clone in a folder named **`late_fusion_roscon_data`**. The folder should contain:
 
 ```text
 ~/roscon-workshop/
