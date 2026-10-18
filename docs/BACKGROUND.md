@@ -1,20 +1,31 @@
-# Workshop background: AGHRI dataset and late camera-LiDAR human detection fusion and multi-object tracking (DeepFusionMOT)
+# Workshop background: AGHRI dataset and late camera-LiDAR fusion
 
 This page introduces the AGHRI dataset and the late camera-LiDAR human detection fusion and multi-object tracking pipeline used in the demo. The [main README](../README.md) has the setup commands and activities.
 
 ## Section 1 — AGHRI Dataset Overview
 
-[Watch the AGHRI dataset video](https://www.youtube.com/watch?v=nL7mKnMcCzc).
+### ▶ Watch the AGHRI Dataset Video
 
-AGHRI is a multimodal dataset developed for robot perception of humans in agricultural and off-road environments. It was designed for close-proximity human–robot interaction scenarios in which a compact mobile robot operates around farm workers in cluttered, dynamic, and frequently occluded environments.
+[Watch the AGHRI dataset video](https://www.youtube.com/watch?v=nL7mKnMcCzc)
 
-The dataset supports research on **2D and 3D human detection**, **2D and 3D multi-object tracking**, **person re-identification**, and **camera–LiDAR fusion**. The [AGHRI dataset page](https://doi.org/10.24385/lincoln.32982638) describes the full release; the workshop download contains two selected recordings and their supporting files.
+[![Watch on YouTube](https://img.shields.io/badge/Watch_on_YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=nL7mKnMcCzc)
+
+**AGHRI** is a multimodal dataset developed for robot perception of humans in agricultural and off-road environments. It was designed for close-proximity human–robot interaction scenarios in which a compact mobile robot operates around farm workers in cluttered, dynamic, and frequently occluded environments.
+
+AGHRI supports research on:
+
+- 2D human detection
+- 3D human detection
+- 2D multi-object tracking
+- 3D multi-object tracking
+- person re-identification
+- camera–LiDAR fusion
 
 ### Robotic Platform and Sensors
 
 AGHRI was collected on an **Agilex Hunter 2.0** with a **ZED 2 RGB-D camera**, three **Arducam fisheye cameras**, and a **Livox Mid-360 LiDAR**.
 
-![AGHRI robotic platform and sensors](background/aghri_platform.png)
+<img src="background/aghri_platform.png" alt="AGHRI robotic platform and sensors" width="420">
 
 The modalities capture different views of the same scene: RGB appearance, depth, wide-angle fisheye images, and a 3D point cloud.
 
@@ -56,7 +67,7 @@ The robot is recorded in both stationary and moving states.
 
 ### Annotations and Identities
 
-AGHRI provides **2D and 3D human annotations** with participant-level identities that remain consistent across the annotated modalities and released sequences. The ZED RGB and three fisheye views have 2D person boxes; LiDAR has 3D person cuboids. The front-ZED occlusion log records partial, total, and out-of-frame visibility events. ZED depth is sensor data but is not an annotated modality.
+AGHRI provides **2D and 3D human annotations** with participant-level identities that remain consistent across the annotated modalities and released sequences.
 
 **Today's demo uses the ZED RGB camera and Livox LiDAR** from two recordings in different environments: `footpath` and `vine` (vineyard).
 
