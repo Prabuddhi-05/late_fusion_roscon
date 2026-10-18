@@ -40,13 +40,13 @@ The dataset was recorded at the University of Lincoln's Riseholme Campus in Linc
 - Footpath
 - Farmside
 
-Recordings include sunny and overcast conditions, with snow present in some polytunnel, footpath, and farmside sessions.
+Recordings include **sunny** and **overcast** conditions, with **snow** present in some polytunnel, footpath, and farmside sessions.
 
 ![Polytunnel, vineyard, footpath, and farmside scenes](background/aghri_environments.png)
 
 ### Activities
 
-AGHRI contains single-person and multi-person sequences covering common movement and agricultural work activities.
+AGHRI contains **single-person** and **multi-person** sequences covering common movement and agricultural work activities.
 
 **Common activities:**
 
@@ -63,7 +63,7 @@ AGHRI contains single-person and multi-person sequences covering common movement
 - Picking strawberries
 - Picking grapes
 
-The robot is recorded in both stationary and moving states.
+The robot is recorded in both **stationary** and **moving** states.
 
 ### Annotations and Identities
 
@@ -75,7 +75,7 @@ A dataset identity is ground truth; a number assigned by DeepFusionMOT during th
 
 ## Section 2 — Late Camera-LiDAR Fusion (DeepFusionMOT)
 
-The [original DeepFusionMOT research](https://github.com/wangxiyang2022/DeepFusionMOT) proposes a late camera–LiDAR fusion framework for multi-object detection and tracking. This workshop uses its AGHRI adaptation to track humans.
+The [original DeepFusionMOT research](https://github.com/wangxiyang2022/DeepFusionMOT) proposes a late camera–LiDAR fusion framework for multi-object detection and tracking. This workshop uses its AGHRI adaptation to track **humans**.
 
 Late fusion projects 3D LiDAR detections into the camera image and matches them with 2D camera detections using intersection over union (**IoU**).
 
@@ -89,7 +89,7 @@ The wider AGHRI benchmark supports **SECOND or PointPillars** for LiDAR detectio
 
 1. YOLO11s produces a 2D person box; PointPillars produces a 3D person cuboid.
 2. Calibration transforms the LiDAR cuboid into the camera view. Its projected corners form a 2D image envelope.
-3. The fusion node compares that envelope with camera boxes using image-space IoU. It selects one-to-one camera–LiDAR pairs that favour higher overlap and accepts pairs that meet the IoU threshold.
+3. The fusion node compares that envelope with YOLO boxes using image-space IoU. It selects one-to-one camera–LiDAR pairs that favour higher overlap and accepts pairs that meet the IoU threshold.
 4. It sends results down three paths: **matched 3D**, **unmatched LiDAR 3D**, and **unmatched camera 2D**. A match preserves the detector's 3D cuboid.
 
 ### Same-frame camera–LiDAR association example
