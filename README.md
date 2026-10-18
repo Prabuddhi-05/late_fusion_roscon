@@ -190,6 +190,10 @@ Near **2.8 seconds into the bag**, a foreground worker crosses in front of anoth
 
 ![Vineyard occlusion: the hidden worker is absent from camera detections but has a LiDAR detection and track](docs/occlusion_example.png)
 
+## Video walkthrough
+
+Watch the [CPU footpath walkthrough](docs/cpu_footpath_walkthrough.webm) (95 seconds) to see the Dev Container, bag replay, and RViz2 desktop in use.
+
 ## Troubleshooting
 
 | Problem | Check |
