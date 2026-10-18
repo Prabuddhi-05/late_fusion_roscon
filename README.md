@@ -118,11 +118,11 @@ This is an actual vineyard replay. The image panels are on the left; the point c
 
 | Color | RViz2 display | Meaning |
 | --- | --- | --- |
-| **Blue** | YOLO 2D Detection Image | Camera detector's 2D person box. |
-| **Yellow** | Original LiDAR Boxes | PointPillars' original 3D person proposal. |
-| **Green** | Matched 3D Boxes / Matched 3D Projection Image | A LiDAR proposal accepted as a match to a camera detection. |
-| **Red** | Unmatched LiDAR Boxes | A LiDAR proposal with no accepted camera match in that fusion update. |
-| **Magenta** | Tracked DeepFusionMOT Boxes / Tracked DeepFusionMOT Projection Image | A track maintained by DeepFusionMOT; its number is a tracker ID. |
+| **Blue** | YOLO 2D Detection Image | YOLO11s' 2D human detections. |
+| **Yellow** | Original LiDAR Boxes | PointPillars' original 3D human detections. |
+| **Green** | Matched 3D Boxes / Matched 3D Projection Image | PointPillars' 3D detections matched with YOLO11s' 2D detections. |
+| **Red** | Unmatched LiDAR Boxes | PointPillars' 3D detections without an accepted camera match. |
+| **Magenta** | Tracked DeepFusionMOT Boxes / Tracked DeepFusionMOT Projection Image | Human tracks maintained by DeepFusionMOT; each number is a tracker ID. |
 
 The colored 3D boxes can overlap because each display shows a different stage of the same pipeline. **Red does not by itself mean a false detection**: the person may be occluded, outside the camera view, missed by YOLO11s, or incorrectly matched. Inspect the image, point cloud, and nearby frames before deciding.
 
