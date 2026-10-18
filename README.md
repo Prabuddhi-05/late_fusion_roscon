@@ -96,8 +96,19 @@ To see the ROS 2 topics while a bag is playing, open a second container terminal
 
 ```bash
 ros2 topic list -t
-ros2 topic info /deepfusionmot/tracked_3d
 ```
+
+The main topic families are the same in both modes:
+
+| Topic family | Example topics | What they carry |
+| --- | --- | --- |
+| `/dataset/` | `/dataset/cam_zed_rgb/image`, `/dataset/lidar/points` | Camera images and LiDAR points replayed from the bag. |
+| `/detector/` | `/detector/camera/detections`, `/detector/lidar/detections` | YOLO11s and PointPillars predictions: replayed caches in CPU mode, live inference in GPU mode. |
+| `/late_fusion/` | `/late_fusion/matched_3d`, `/late_fusion/unmatched_lidar`, `/late_fusion/unmatched_camera` | Live camera–LiDAR matching results. |
+| `/deepfusionmot/` | `/deepfusionmot/tracked_3d`, `/deepfusionmot/tracked_2d` | Live 3D and 2D tracks. |
+| `/visualization/` | `/visualization/tracked_projection_image`, `/visualization/tracked_3d_markers` | Images and markers shown in RViz2. |
+
+For detector status, CPU mode publishes `/detector/camera/cache_stats` and `/detector/lidar/cache_stats`; GPU mode publishes `/detector/camera/live_stats` and `/detector/lidar/live_stats`.
 
 ### 5. Understand the RViz2 view
 
