@@ -25,21 +25,20 @@ For **GPU mode**, also install an NVIDIA driver and the [NVIDIA Container Toolki
 
 ## 2. Download the repository and workshop data
 
-Clone the GitHub repository into a folder named `roscon_workshop_repo`. Replace the URL below with the repository's HTTPS URL from GitHub:
+Clone the GitHub repository:
 
 ```bash
 mkdir -p ~/roscon-workshop
 cd ~/roscon-workshop
-REPO_URL='https://github.com/Prabuddhi-05/late_fusion_roscon.git'
-git clone "$REPO_URL" roscon_workshop_repo
+git clone https://github.com/Prabuddhi-05/late_fusion_roscon.git
 ```
 
-Download and extract the organiser's **`roscon_workshop_data`** folder beside the clone. Keep the folder names and contents intact:
+Download and extract the organiser's **`late_fusion_roscon_data`** folder beside the clone. Keep the folder names and contents intact:
 
 ```text
 ~/roscon-workshop/
-├── roscon_workshop_repo/
-└── roscon_workshop_data/
+├── late_fusion_roscon/
+└── late_fusion_roscon_data/
     ├── bags/
     │   ├── footpath/
     │   └── vine/
@@ -52,7 +51,7 @@ Download and extract the organiser's **`roscon_workshop_data`** folder beside th
 Check that the download is complete:
 
 ```bash
-cd ~/roscon-workshop/roscon_workshop_data
+cd ~/roscon-workshop/late_fusion_roscon_data
 sha256sum -c SHA256SUMS.txt
 ```
 
@@ -60,7 +59,7 @@ The CPU container mounts `bags` and `caches`; the GPU container mounts `bags` an
 
 ## 3. Open a Dev Container
 
-1. Open `~/roscon-workshop/roscon_workshop_repo` in VS Code (**File → Open Folder**).
+1. Open `~/roscon-workshop/late_fusion_roscon` in VS Code (**File → Open Folder**).
 2. Press **Ctrl+Shift+P**, select **Dev Containers: Reopen in Container**, and choose either **ROSCon CPU cached detections** or **ROSCon GPU live detections**.
 3. Wait for the image build and for VS Code to reopen with the selected container name in its title bar. The first build downloads dependencies and can take time.
 4. Open **Terminal → New Terminal**. The prompt should be inside `/workspace`.
@@ -172,7 +171,7 @@ An unmatched LiDAR box elsewhere in the scene is only a proposal. Check surround
 
 | Problem | Check |
 | --- | --- |
-| Bag, cache, or checkpoint missing | Confirm `roscon_workshop_data` is beside the repo and the folder names match Step 2. If data was added after opening the container, run **Dev Containers: Rebuild Container**. |
+| Bag, cache, or checkpoint missing | Confirm `late_fusion_roscon_data` is beside the repo and the folder names match Step 2. If data was added after opening the container, run **Dev Containers: Rebuild Container**. |
 | Browser shows a directory listing | Add **`/vnc.html`** to the forwarded address. |
 | Port 6080 is occupied | Add `ROSCON_DESKTOP_PORT=6081` to `.env`, reopen the container, and use the new address in **PORTS**. |
 | Docker permission error | Make sure `docker info` works as your Ubuntu user before opening VS Code. |

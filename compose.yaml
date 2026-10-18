@@ -30,8 +30,8 @@ services:
       ROSCON_MODE: cpu
     volumes:
       - .:/workspace:rw
-      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/bags:/data/bags:ro"
-      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/caches:/data/caches:ro"
+      - "${ROSCON_DATA_DIR:-../late_fusion_roscon_data}/bags:/data/bags:ro"
+      - "${ROSCON_DATA_DIR:-../late_fusion_roscon_data}/caches:/data/caches:ro"
 
   gpu:
     <<: *common
@@ -46,8 +46,8 @@ services:
       ROSCON_MODE: gpu
     volumes:
       - .:/workspace:rw
-      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/bags:/data/bags:ro"
-      - "${ROSCON_DATA_DIR:-../roscon_workshop_data}/checkpoints:/models:ro"
+      - "${ROSCON_DATA_DIR:-../late_fusion_roscon_data}/bags:/data/bags:ro"
+      - "${ROSCON_DATA_DIR:-../late_fusion_roscon_data}/checkpoints:/models:ro"
     deploy:
       resources:
         reservations:

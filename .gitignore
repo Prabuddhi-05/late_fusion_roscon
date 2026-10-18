@@ -1,6 +1,6 @@
 .env
 /data/
-/roscon_workshop_data/
+/late_fusion_roscon_data/
 /bags/
 /caches/
 /checkpoints/
