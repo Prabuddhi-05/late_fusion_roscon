@@ -1,13 +1,16 @@
 # ROSCon 2026: camera–LiDAR detection and tracking
 
-Replay an AGHRI ROS 2 recording, inspect camera and LiDAR detections, and see how late fusion and DeepFusionMOT track people in RViz2. The workshop runs in a VS Code Dev Container on **Ubuntu**.
+**ROSCon UK 2026 workshop: ROS in the Field**<br>
+ROS 2 late camera–LiDAR fusion and human tracking on AGHRI
+
+Replay an AGHRI dataset ROS 2 recording, inspect camera and LiDAR detections, and see how late fusion matches them and DeepFusionMOT tracks humans in RViz2. The workshop runs in a VS Code Dev Container on **Ubuntu**.
 
 | Mode | Detection stage | Fusion, tracking, and RViz2 |
 | --- | --- | --- |
 | **CPU cached detections** | Replays prerecorded YOLO11s and PointPillars predictions | Runs live |
 | **GPU live detections** | Runs YOLO11s and PointPillars on an NVIDIA GPU | Runs live |
 
-Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a separate download.
+Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a [separate download](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd).
 
 **Before the workshop:** Complete Steps 1–3. Install the prerequisites, download and verify the data, then open your chosen Dev Container and wait for VS Code to reopen inside it. This completes that mode's initial Docker image build. If you plan to try both modes, repeat Step 3 for the other mode before the workshop.
 
@@ -17,7 +20,7 @@ Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GP
 
 ### 1. Install Docker
 
-Install [Docker Engine with the Compose plugin](https://docs.docker.com/engine/install/ubuntu/), [VS Code](https://code.visualstudio.com/docs/setup/linux), the **Dev Containers** extension, and Git. Configure Docker so your user can run it from VS Code; follow [Docker's Linux post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) if needed.
+Install [Docker Engine with the Compose plugin](https://docs.docker.com/engine/install/ubuntu/), [VS Code](https://code.visualstudio.com/docs/setup/linux), the **Dev Containers** extension, and Git. Configure your Ubuntu user account to run Docker without `sudo`, so VS Code Dev Containers can start the container. If `docker info` reports a permission error, follow [Docker's Linux post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/).
 
 In an Ubuntu terminal, check:
 
@@ -61,7 +64,7 @@ cd ~/roscon-workshop/late_fusion_roscon_data
 sha256sum -c SHA256SUMS.txt
 ```
 
-The CPU container mounts `bags` and `caches`; the GPU container mounts `bags` and `checkpoints`. You do not need to copy these files into the GitHub repository.
+The CPU container mounts `bags` and `caches`; the GPU container mounts `bags` and `checkpoints`. Do not copy these files into the `late_fusion_roscon` repository.
 
 ### 3. Build and open a Dev Container
 
@@ -74,9 +77,9 @@ VS Code starts the selected service from `compose.yaml`. If you later want the o
 
 ## Hands-on workshop
 
-### 4. Play a bag and open RViz2
+### 4. Play a ROS 2 bag and open RViz2
 
-In the **container terminal**, run one recording:
+The **footpath** bag has fewer people and is a good place to start. In the **container terminal**, run:
 
 ```bash
 bash run.sh footpath
@@ -86,7 +89,7 @@ bash run.sh footpath
 
 Open VS Code's **PORTS** tab, find **ROSCon RViz2 desktop** (container port **6080**), and choose **Open in Browser**. Open the forwarded address with `/vnc.html` at the end, then click **Connect**. For example, if VS Code forwards to port 6080, use `http://localhost:6080/vnc.html`. Use the actual forwarded address shown in **PORTS** if it differs.
 
-When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. To play the other scene, run:
+When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. The **vineyard** bag has several workers and trolleys. To play it, run:
 
 ```bash
 bash run.sh vine
@@ -102,13 +105,11 @@ The main topic families are the same in both modes:
 
 | Topic family | Example topics | What they carry |
 | --- | --- | --- |
-| `/dataset/` | `/dataset/cam_zed_rgb/image`, `/dataset/lidar/points` | Camera images and LiDAR points replayed from the bag. |
-| `/detector/` | `/detector/camera/detections`, `/detector/lidar/detections` | YOLO11s and PointPillars predictions: replayed caches in CPU mode, live inference in GPU mode. |
-| `/late_fusion/` | `/late_fusion/matched_3d`, `/late_fusion/unmatched_lidar`, `/late_fusion/unmatched_camera` | Live camera–LiDAR matching results. |
-| `/deepfusionmot/` | `/deepfusionmot/tracked_3d`, `/deepfusionmot/tracked_2d` | Live 3D and 2D tracks. |
-| `/visualization/` | `/visualization/tracked_projection_image`, `/visualization/tracked_3d_markers` | Images and markers shown in RViz2. |
-
-For detector status, CPU mode publishes `/detector/camera/cache_stats` and `/detector/lidar/cache_stats`; GPU mode publishes `/detector/camera/live_stats` and `/detector/lidar/live_stats`.
+| `/dataset/` | `/dataset/cam_zed_rgb/image`<br>`/dataset/lidar/points` | Camera images and LiDAR points replayed from the bag. |
+| `/detector/` | `/detector/camera/detections`<br>`/detector/lidar/detections` | YOLO11s and PointPillars predictions: replayed caches in CPU mode, live inference in GPU mode. |
+| `/late_fusion/` | `/late_fusion/matched_3d`<br>`/late_fusion/unmatched_lidar`<br>`/late_fusion/unmatched_camera` | Matched 3D detections, unmatched LiDAR 3D detections, and unmatched camera 2D detections. |
+| `/deepfusionmot/` | `/deepfusionmot/tracked_3d`<br>`/deepfusionmot/tracked_2d` | Live 3D and 2D tracks. |
+| `/visualization/` | `/visualization/tracked_projection_image`<br>`/visualization/tracked_3d_markers` | Images and markers shown in RViz2. |
 
 ### 5. Understand the RViz2 view
 
