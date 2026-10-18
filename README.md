@@ -9,7 +9,7 @@ Replay an AGHRI ROS 2 recording, inspect camera and LiDAR detections, and see ho
 
 Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a separate download.
 
-**Before the workshop:** Complete Steps 1–3, including the data checksum check and the first Dev Container build. Build both modes in advance if you want to try both; the first build can take time.
+**Before the workshop:** Complete Steps 1–3: install the prerequisites, clone the repository, download and verify the workshop data, and open your chosen Dev Container once so Docker can build its image. Build both modes in advance if you want to try both; the first build can take time.
 
 **During the workshop:** Start at Step 4 to play a bag and explore the activities.
 
