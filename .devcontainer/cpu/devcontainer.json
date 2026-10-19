@@ -4,8 +4,9 @@
   "service": "cpu",
   "runServices": ["cpu"],
   "workspaceFolder": "/workspace",
+  "remoteUser": "roscon",
+  "updateRemoteUserUID": true,
   "shutdownAction": "stopCompose",
-  "initializeCommand": "bash docker/prepare.sh",
   "forwardPorts": [6080],
   "portsAttributes": {
     "6080": {

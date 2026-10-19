@@ -1,8 +1,6 @@
-version: "3.8"
-
 x-common: &common
   init: true
-  user: "1000:1000"
+  user: roscon
   environment: &common_environment
     DISPLAY: ":99"
     LIBGL_ALWAYS_SOFTWARE: "1"
@@ -11,9 +9,8 @@ x-common: &common
     ROS_LOCALHOST_ONLY: "1"
     ROSCON_LAUNCH_RVIZ: "false"
     HOME: /tmp
-    NVIDIA_DRIVER_CAPABILITIES: compute,utility
-  ports:
-    - "127.0.0.1:${ROSCON_DESKTOP_PORT:-6080}:6080"
+  tmpfs:
+    - /output:mode=1777
   command: ["/bin/bash", "-lc", "/opt/roscon/desktop.sh && exec sleep infinity"]
 
 services:
@@ -24,7 +21,8 @@ services:
     build:
       context: .
       target: cpu
-      network: "${ROSCON_BUILD_NETWORK:-default}"
+    ports:
+      - "127.0.0.1:${ROSCON_CPU_DESKTOP_PORT:-6080}:6080"
     environment:
       <<: *common_environment
       ROSCON_MODE: cpu
@@ -40,10 +38,12 @@ services:
     build:
       context: .
       target: gpu
-      network: "${ROSCON_BUILD_NETWORK:-default}"
+    ports:
+      - "127.0.0.1:${ROSCON_GPU_DESKTOP_PORT:-6081}:6080"
     environment:
       <<: *common_environment
       ROSCON_MODE: gpu
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
     volumes:
       - .:/workspace:rw
       - "${ROSCON_DATA_DIR:-../late_fusion_roscon_data}/bags:/data/bags:ro"

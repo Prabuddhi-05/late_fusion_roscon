@@ -2,7 +2,7 @@
 
 ## ROS 2 late camera–LiDAR fusion and human tracking on AGHRI
 
-Replay an AGHRI dataset ROS 2 recording to inspect camera and LiDAR detections, see how the DeepFusionMOT pipeline fuses them and tracks humans, and view the results in RViz2. The workshop runs in a VS Code Dev Container on **Ubuntu**.
+Replay an AGHRI dataset ROS 2 recording to inspect camera and LiDAR detections, see how the DeepFusionMOT pipeline fuses them and tracks humans, and view the results in RViz2. The workshop runs in a VS Code Dev Container on **Ubuntu x86-64**.
 
 | Mode | Detection stage | Fusion, tracking, and RViz2 |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ docker compose version
 docker info >/dev/null
 ```
 
-For **GPU mode**, also install an NVIDIA driver and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html), then check `nvidia-smi` on the host. CPU mode needs no GPU.
+For **GPU mode**, use an NVIDIA GPU, install an NVIDIA driver and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html), then check `nvidia-smi` on the host and `docker run --rm --gpus all ubuntu:22.04 nvidia-smi` in an Ubuntu terminal. CPU mode needs no GPU.
 
 ### 2. Download the repository and data
 
@@ -86,7 +86,7 @@ bash run.sh footpath
 
 `run.sh` selects the bag, checks the required files, launches the ROS 2 pipeline, and checks its output. You can use `ros2` commands directly in any new container terminal.
 
-Open VS Code's **PORTS** tab, find **ROSCon RViz2 desktop** (container port **6080**), and choose **Open in Browser**. Open the forwarded address with `/vnc.html` at the end, then click **Connect**. For example, if VS Code forwards to port 6080, use `http://localhost:6080/vnc.html`. Use the actual forwarded address shown in **PORTS** if it differs.
+Open VS Code's **PORTS** tab, find **ROSCon RViz2 desktop** (container port **6080**), and choose **Open in Browser**. Open the forwarded address with `/vnc.html` at the end, then click **Connect**. The usual addresses are `http://localhost:6080/vnc.html` for CPU mode and `http://localhost:6081/vnc.html` for GPU mode; use the actual address shown in **PORTS** if it differs.
 
 When the bag finishes, the terminal should print `cpu footpath pipeline: PASS` or `gpu footpath pipeline: PASS`. The **vineyard** bag shows four workers, trolleys, and trays. To play it, run:
 
@@ -202,7 +202,7 @@ https://github.com/user-attachments/assets/23314670-c932-40db-8c4d-3fb0f2f3e88d
 | --- | --- |
 | Bag, cache, or checkpoint missing | Confirm `late_fusion_roscon_data` is beside the repo and the folder names match Step 2. If data was added after opening the container, run **Dev Containers: Rebuild Container**. |
 | Browser shows a directory listing | Add **`/vnc.html`** to the forwarded address. |
-| Port 6080 is occupied | Add `ROSCON_DESKTOP_PORT=6081` to `.env`, reopen the container, and use the new address in **PORTS**. |
+| Desktop port is occupied | CPU mode uses host port 6080 and GPU mode uses 6081. If either is occupied, set `ROSCON_CPU_DESKTOP_PORT=6082` or `ROSCON_GPU_DESKTOP_PORT=6083` in a `.env` file beside `compose.yaml`, then reopen the container. Use the address shown in **PORTS**. |
 | Docker permission error | Make sure `docker info` works as your Ubuntu user before opening VS Code. |
 | GPU mode says CUDA is unavailable | Check the host driver and NVIDIA Container Toolkit, or use the CPU cached detections container. |
 
