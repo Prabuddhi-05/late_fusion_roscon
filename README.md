@@ -9,7 +9,7 @@ Replay an AGHRI dataset ROS 2 recording to inspect camera and LiDAR detections, 
 | **CPU cached detections** | Replays prerecorded YOLO11s and PointPillars predictions | Runs live |
 | **GPU live detections** | Runs YOLO11s and PointPillars on an NVIDIA GPU | Runs live |
 
-Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a [separate download](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd).
+Both modes use the same `vine` and `footpath` bags. The bags, CPU caches, and GPU checkpoints are supplied in a [separate download](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd) or [Google Drive](https://drive.google.com/drive/folders/1rP0HGqdUx40etdyz0gBG1b6w4pOTOM6X?usp=drive_link).
 
 **Before the workshop:** Complete Steps 1–3. Install the prerequisites, download and verify the data, then open your chosen Dev Container and wait for VS Code to reopen inside it. This completes that mode's initial Docker image build. If you plan to try both modes, repeat Step 3 for the other mode before the workshop.
 
@@ -41,7 +41,7 @@ cd ~/roscon-workshop
 git clone https://github.com/Prabuddhi-05/late_fusion_roscon.git
 ```
 
-Download the data from the [shared workshop folder](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd). Extract it beside the clone in a folder named **`late_fusion_roscon_data`**. The folder should contain:
+Download the data from the [shared workshop folder](https://universityoflincoln-my.sharepoint.com/:f:/g/personal/26619055_students_lincoln_ac_uk/IgAVkIggjvc_TpyG5g9QUilrAQfLTD1STLp0pPAM_adhxU0?e=45KeAd) or [Google Drive](https://drive.google.com/drive/folders/1rP0HGqdUx40etdyz0gBG1b6w4pOTOM6X?usp=drive_link). Extract it beside the clone in a folder named **`late_fusion_roscon_data`**. The folder should contain:
 
 ```text
 ~/roscon-workshop/
